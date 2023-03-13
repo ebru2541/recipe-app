@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "../pages/home/Home";
@@ -8,23 +8,20 @@ import Detail from "../pages/detail/Detail";
 import { GlobalStyle } from "../style/GlobalStyle";
 import PrivateRouter from "./PrivateRouter";
 const AppRouter = () => {
+  const [user, setUser] = useState("");
+  sessionStorage.setItem("user",user);
   return (
     <BrowserRouter>
-    <GlobalStyle/>
+      <GlobalStyle />
       <Routes>
-        <Route
-          path="/login"
-          element={
-            <Login />
-          }
-        />
+        <Route path="/login" element={<Login />} />
 
         <Route path="/" element={<PrivateRouter />}>
           {user ? (
             <>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
+              {/* <Route path="/contact" element={<Contact />} /> */}
               <Route path="/detail" element={<Detail />} />
             </>
           ) : (
